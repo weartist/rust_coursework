@@ -12,7 +12,12 @@ fn main() {
         // 所有权转移
         let x = 1;
         let y = x;
-        // println!("{}", x); //错误，x已经被转移。
+        println!("{}", x); //错误，x已经被转移。
+
+        let s = String::from("first");
+        let s1 = s;
+        let s2 = s; // 也是错误，此时s的所有权已经移动到s1了，s2再次获取所有权会报错
+
     }
 
     {
@@ -70,6 +75,12 @@ fn main() {
         println!("{}", s1);  //输出 first second
     }
 
+    {
+        let mut s = String::from("hello");
+        let r1 = &mut s;
+        let r2 = &s;
+        println!("{}", r2); //这种引用编译期间也会报错，因为r1和r2同时存在，r1是可变借用，r2是不可变引用
+    }
     
 
 }
