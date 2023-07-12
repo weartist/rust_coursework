@@ -1,4 +1,8 @@
 
+fn string_push(s: &mut String, new_str: &str) {
+    s.push_str(new_str);
+}
+
 fn main() {
 
     {
@@ -54,5 +58,18 @@ fn main() {
         println!("{}", s3); //注意这句会导致上一行报错，因为s2直到这行还是需要存在的
     }
 
+    {
+        // 同样的规则，对于参数为可变借用的方法也是同理，如果方法需要修改一个参数，那么这个参数就必须是可变借用：
+        let mut s1 = String::from("first");
+        string_push(&mut s1, " second");
+        println!("{}", s1);  //输出 first second
+
+        // 如果参数是不可变借用，那么方法内部不能修改这个参数
+        let s2 = String::from("first");
+        string_push(s2, " second"); //编译期间会报错，编译器会替我们做一些基础的检测
+        println!("{}", s1);  //输出 first second
+    }
+
+    
 
 }
