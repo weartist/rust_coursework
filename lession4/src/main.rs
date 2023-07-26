@@ -53,7 +53,6 @@ impl Girth for Triangle {
 }
 
 
-
 struct Vec {
     x: i32,
     y: i32,
@@ -76,8 +75,6 @@ trait Addible<RHS = Self> {
     fn add(self, other: RHS) -> Self::Output;
 }
 
-// 为Point类型实现AddTrait Trait
-// 为Vector类型实现AddTrait Trait
 impl Addible<Vec> for Vec {
     type Output = Vec;
     fn add(self, other: Vec) -> Vec {
@@ -124,7 +121,6 @@ fn main() {
 
 
     // 搜索相关文档，为你自己定义的一个类型或多个类型实现加法运算（用符号 +），并构思使用Trait Object实现类型方法的调用。
-
     // 基本使用:
     let vec1 = Vec { x: 1, y: 2 };
     let vec2 = Vec { x: 3, y: 4 };
