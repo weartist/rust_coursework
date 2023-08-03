@@ -1,11 +1,13 @@
 use std::ops::Add;
 
+// 定义一个枚举代表一个图形
 enum Shape {
     Circle { radius: f32 },
     Square { width: f32, height: f32 },
     Triangle { side_lenght: f32},
 }
-  
+
+// 为图形枚举类实现周长trait
 impl Shape {
     fn girth(&self) -> f32 {
         match self {
@@ -16,13 +18,12 @@ impl Shape {
     }
 }
 
-
-
-
+// 一个周长trait，调用girth可以返回类型为f32的周长值
 trait Girth {
     fn girth(&self) -> f32;
 }
 
+// 定义一个代表圆的结构体，并实现上述的周长trait
 struct Circle {
     radius: f32,
 }
@@ -33,6 +34,7 @@ impl Girth for Circle {
     }
 }
 
+// 定义一个代表方形的结构体，并实现上述的周长trait
 struct Square {
     width: f32,
     height: f32,
@@ -43,6 +45,7 @@ impl Girth for Square {
     }
 }
 
+// 定义一个代表等边三角形的结构体，并实现上述的周长trait
 struct Triangle {
     side_lenght: f32,
 }
@@ -58,6 +61,7 @@ struct Vec {
     y: i32,
 }
 
+// 给vec实现add运算
 impl std::ops::Add for Vec {
     type Output = Vec;
 
@@ -75,6 +79,7 @@ trait Addible<RHS = Self> {
     fn add(self, other: RHS) -> Self::Output;
 }
 
+// 给vec实现Addible，让他能够支持add运算
 impl Addible<Vec> for Vec {
     type Output = Vec;
     fn add(self, other: Vec) -> Vec {
@@ -85,6 +90,7 @@ impl Addible<Vec> for Vec {
     }
 }
 
+// 该方法接受实现了Addible的两个对象，并将两个对象add后的结果返回
 fn add<T: Addible>(a: T, b: T) -> T::Output {
     a.add(b)
 }
